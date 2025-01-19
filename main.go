@@ -4,15 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
 func main() {
+	port := os.Getenv("PORT")
 	m := http.NewServeMux()
 
 	m.HandleFunc("/", handlePage)
 
-	const addr = ":8080"
+	addr := fmt.Sprintf(":%s", port)
+	//const addr = ":8080"
 	srv := http.Server{
 		Handler:      m,
 		Addr:         addr,
